@@ -16,13 +16,12 @@ document.querySelectorAll('[data-reveal]').forEach((el, i) => {
   });
 });
 
-// Capa do projeto compactada por padrão; clicar nela abre a galeria
-// (acordeão em CSS via aria-expanded, ver .project__gallery-wrap).
-document.querySelectorAll('.project__cover').forEach((cover) => {
-  const hintText = cover.querySelector('.project__cover-hint-text');
+// Card de projeto compactado por padrão; clicar na capa faz o card
+// crescer e abre a galeria (acordeão em CSS via aria-expanded, ver
+// .project-card__cover e .project-card__gallery-wrap).
+document.querySelectorAll('.project-card__cover').forEach((cover) => {
   cover.addEventListener('click', () => {
     const isOpen = cover.getAttribute('aria-expanded') === 'true';
     cover.setAttribute('aria-expanded', String(!isOpen));
-    if (hintText) hintText.textContent = isOpen ? 'Ver projeto' : 'Fechar';
   });
 });
