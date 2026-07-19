@@ -31,12 +31,28 @@ document.querySelectorAll('.project-category__grid').forEach((grid) => {
       // tamanho/posição no grid (grid-column via :has()), e a capa
       // precisa animar junto com ele, não contra uma referência que
       // está se movendo ao mesmo tempo.
+      //
+      // Ao encolher, o layout já fica pequeno instantaneamente (o que
+      // empurra "Email Marketing" etc. pra posição final na hora), mas
+      // a capa ainda pinta grande enquanto anima de volta — como ela
+      // vem antes no HTML, esse conteúdo ficaria por cima dela. Sobe o
+      // z-index só durante essa fase pra cobrir o que já reposicionou.
+      if (!expand) {
+        card.style.position = 'relative';
+        card.style.zIndex = '5';
+      }
       const state = Flip.getState(grid.querySelectorAll('.project-card'));
       cover.setAttribute('aria-expanded', String(expand));
       Flip.from(state, {
         duration: 0.5,
         ease: 'power2.inOut',
-        onComplete: onDone,
+        onComplete: () => {
+          if (!expand) {
+            card.style.position = '';
+            card.style.zIndex = '';
+          }
+          if (onDone) onDone();
+        },
       });
     };
 
