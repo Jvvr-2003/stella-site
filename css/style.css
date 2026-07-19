@@ -11,9 +11,13 @@
   --border: #E4DFD2;
 
   /* Neue Haas Grotesk / Helvetica Neue e Bickham Script são pagas;
-     Archivo e Cormorant Garamond são as equivalentes livres usadas aqui. */
+     Archivo, Pinyon Script e Bodoni Moda são as equivalentes livres
+     usadas aqui — Pinyon Script pra letra ornamental caligráfica,
+     Bodoni Moda pro serifado fino de alto contraste (estilo Didone)
+     visto no print de referência ("ABOUT", "RENT", "MODELS" etc). */
   --font-display: 'Archivo', sans-serif;
-  --font-script: 'Cormorant Garamond', serif;
+  --font-swash: 'Pinyon Script', cursive;
+  --font-serif: 'Bodoni Moda', serif;
   --font-body: 'Inter', sans-serif;
 
   --container: 1440px;
@@ -89,9 +93,9 @@ a { text-decoration: none; color: inherit; }
   text-transform: uppercase;
 }
 .type-accent {
-  font-family: var(--font-script);
-  font-style: italic;
-  font-weight: 500;
+  font-family: var(--font-swash);
+  font-style: normal;
+  font-weight: 400;
   font-size: var(--size-accent);
   line-height: 1;
   letter-spacing: normal;
@@ -133,18 +137,18 @@ a { text-decoration: none; color: inherit; }
   flex-wrap: wrap;
 }
 .swash__letter {
-  font-family: var(--font-script);
-  font-style: italic;
-  font-weight: 500;
-  line-height: 0.8;
-  margin-right: -0.04em;
+  font-family: var(--font-swash);
+  font-style: normal;
+  font-weight: 400;
+  line-height: 0.7;
+  margin-right: -0.02em;
 }
 .swash__rest {
-  font-family: var(--font-script);
+  font-family: var(--font-serif);
   font-style: normal;
   font-weight: 400;
   text-transform: uppercase;
-  letter-spacing: 0.07em;
+  letter-spacing: 0.09em;
 }
 
 /* ============================================
@@ -322,17 +326,17 @@ a { text-decoration: none; color: inherit; }
   line-height: var(--lh-sans-title);
 }
 .split__title-rest {
-  font-family: var(--font-script);
+  font-family: var(--font-serif);
   font-style: normal;
   font-weight: 400;
   text-transform: uppercase;
-  letter-spacing: 0.07em;
+  letter-spacing: 0.09em;
   display: inline-block;
 }
 .split__script {
-  font-family: var(--font-script);
+  font-family: var(--font-serif);
   font-style: italic;
-  font-weight: 500;
+  font-weight: 400;
   text-transform: none;
 }
 .split__copy {
