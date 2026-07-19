@@ -48,6 +48,11 @@ body {
   color: var(--black);
   font-family: var(--font-body);
   overflow-x: hidden;
+  /* A gente já controla as transições de tamanho via JS (Flip/GSAP);
+     sem isso, o scroll anchoring do navegador "compensa" sozinho as
+     mudanças de altura dos cards de projeto e a página pula no meio
+     da animação de fechar. */
+  overflow-anchor: none;
 }
 
 a { text-decoration: none; color: inherit; }
@@ -522,6 +527,9 @@ a { text-decoration: none; color: inherit; }
   transition: transform 400ms var(--ease);
 }
 .project-card__cover:hover img { transform: scale(1.02); }
+/* Suprime o hover-zoom durante a sequência de abrir/fechar (js/main.js)
+   pra não somar um scale extra por cima da transição de tamanho. */
+.project-card__cover.is-animating:hover img { transform: none; }
 .project-card__hint-icon {
   position: absolute;
   right: 12px;

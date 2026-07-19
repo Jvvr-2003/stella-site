@@ -26,6 +26,7 @@ document.querySelectorAll('.project-category__grid').forEach((grid) => {
     const category = cover.closest('.project-category');
     const wrap = card.querySelector('.project-card__gallery-wrap');
     const items = card.querySelectorAll('.project-card__gallery-item');
+    let isAnimating = false;
 
     const flipCover = (expand, onDone) => {
       // Flipar o .project-card (não só a capa): é o card que muda de
@@ -85,11 +86,23 @@ document.querySelectorAll('.project-category__grid').forEach((grid) => {
     };
 
     cover.addEventListener('click', () => {
+      // Ignora cliques repetidos enquanto a sequência de abrir/fechar
+      // ainda está rodando — clicar de novo no meio da transição podia
+      // sobrepor duas animações e dar a impressão de "crescer de novo".
+      if (isAnimating) return;
+      isAnimating = true;
+      cover.classList.add('is-animating');
+
+      const finish = () => {
+        isAnimating = false;
+        cover.classList.remove('is-animating');
+      };
+
       const isOpen = cover.getAttribute('aria-expanded') === 'true';
       if (isOpen) {
-        closeGallery(() => flipCover(false));
+        closeGallery(() => flipCover(false, finish));
       } else {
-        flipCover(true, openGallery);
+        flipCover(true, () => { openGallery(); finish(); });
       }
     });
   });
