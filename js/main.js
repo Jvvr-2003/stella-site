@@ -27,12 +27,15 @@ document.querySelectorAll('.project-category__grid').forEach((grid) => {
     const items = card.querySelectorAll('.project-card__gallery-item');
 
     const flipCover = (expand, onDone) => {
-      const state = Flip.getState(grid.querySelectorAll('.project-card__cover'));
+      // Flipar o .project-card (não só a capa): é o card que muda de
+      // tamanho/posição no grid (grid-column via :has()), e a capa
+      // precisa animar junto com ele, não contra uma referência que
+      // está se movendo ao mesmo tempo.
+      const state = Flip.getState(grid.querySelectorAll('.project-card'));
       cover.setAttribute('aria-expanded', String(expand));
       Flip.from(state, {
         duration: 0.5,
         ease: 'power2.inOut',
-        absolute: true,
         onComplete: onDone,
       });
     };
