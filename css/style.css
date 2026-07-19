@@ -512,7 +512,7 @@ a { text-decoration: none; color: inherit; }
 }
 .project__gallery-item {
   width: 100%;
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 1190 / 842;
   overflow: hidden;
 }
 .project__gallery-item img {
