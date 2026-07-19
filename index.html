@@ -11,38 +11,64 @@
 </head>
 <body>
 
-<header class="nav" data-reveal>
-  <nav class="nav__inner">
-    <div class="nav__links nav__links--left">
-      <a href="#services">Services</a>
-      <a href="#portfolio">Cases</a>
-    </div>
-    <a href="#" class="nav__logo">Stella</a>
-    <div class="nav__links nav__links--right">
-      <a href="#vip">VIP Day</a>
-      <a href="#contacts">Contacts</a>
-    </div>
-  </nav>
-</header>
-
 <main>
 
-  <!-- HERO -->
+  <!-- HERO — full screen -->
   <section class="hero">
-    <div class="hero__meta" data-reveal>
-      <span>Portfolio — 2026</span>
-      <span>Stella Medeiros</span>
-    </div>
 
-    <h1 class="hero__title" data-reveal>
-      <span class="hero__signature">Stella</span>
-      <span class="hero__word">PORTFOLIO</span>
-    </h1>
+    <nav class="hero__nav" data-reveal>
+      <a href="#" class="hero__logo">Stella</a>
+      <div class="hero__menu">
+        <a href="#portfolio">Work</a>
+        <a href="#about">About</a>
+        <a href="#contacts">Contact</a>
+      </div>
+      <a href="#contacts" class="hero__cta">Say hello <span class="arrow">→</span></a>
+    </nav>
+
+    <div class="hero__orb" aria-hidden="true"></div>
+
+    <div class="hero__body">
+      <div class="hero__left" data-reveal>
+        <h1 class="hero__title">
+          <span class="hero__word">Portfolio</span>
+          <span class="hero__script">Stella</span>
+        </h1>
+      </div>
+
+      <div class="hero__right" data-reveal>
+        <p class="hero__tagline">
+          <strong>Building brands, sites and digital experiences</strong>
+          with intention, clarity and care.
+        </p>
+        <div class="hero__contact">
+          <span class="hero__label">Contact</span>
+          <div class="hero__social">
+            <a href="#" aria-label="Instagram">IG</a>
+            <a href="#" aria-label="Behance">Be</a>
+            <a href="#" aria-label="LinkedIn">In</a>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <div class="hero__foot" data-reveal>
-      <p class="hero__role">Art Director&nbsp;/&nbsp;Brand Designer&nbsp;/&nbsp;Web Design<br><em>(cargo a confirmar)</em></p>
-      <a href="#portfolio" class="hero__cta">See work <span class="arrow">→</span></a>
+      <div class="hero__services">
+        <span class="hero__label">What I do</span>
+        <p>Brand Identity&nbsp;/&nbsp;UI·UX Design<br>Web Design&nbsp;/&nbsp;Art Direction <em>(a confirmar)</em></p>
+      </div>
+
+      <div class="hero__featured">
+        <span class="hero__label">Featured&nbsp;(01)</span>
+        <div class="hero__featured-card placeholder-block placeholder-block--dark">
+          <span class="placeholder-label">projeto em destaque<br>(imagem)</span>
+        </div>
+      </div>
     </div>
+
+    <button class="hero__scroll" aria-label="Rolar para baixo">
+      <span class="arrow">↓</span>
+    </button>
   </section>
 
   <!-- SPLIT SECTION -->
