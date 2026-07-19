@@ -29,22 +29,19 @@ document.querySelectorAll('.project-category__grid').forEach((grid) => {
     let isAnimating = false;
 
     const flipCover = (expand, onDone) => {
-      // Flipar o .project-card (não só a capa): é o card que muda de
-      // tamanho/posição no grid (grid-column via :has()), e a capa
-      // precisa animar junto com ele, não contra uma referência que
-      // está se movendo ao mesmo tempo.
-      //
-      // Ao encolher, o layout já fica pequeno instantaneamente (o que
-      // empurra "Email Marketing" etc. pra posição final na hora), mas
-      // a capa ainda pinta grande enquanto anima de volta. z-index no
-      // card sozinho não resolve — "Email Marketing" é uma categoria
-      // irmã de "Books Imobiliários", não do card, então o empilhamento
-      // é disputado nesse nível. Sobe o z-index da categoria inteira.
+      // Flipar .project-card E .project-card__cover juntos — não só o
+      // card. O card muda de largura (grid-column via :has()) e a capa
+      // muda de proporção (aspect-ratio 1:1 → 16:9) ao mesmo tempo, de
+      // forma independente. Flipar só o pai faz o Flip tentar "esticar"
+      // a capa via transform herdado pra compensar as duas mudanças de
+      // uma vez só, e por um instante ela passa por um tamanho errado
+      // (larga como antes, mas quadrada) antes de encolher de verdade.
+      // Cada elemento precisa da sua própria medição antes/depois.
       if (!expand) {
         category.style.position = 'relative';
         category.style.zIndex = '5';
       }
-      const state = Flip.getState(grid.querySelectorAll('.project-card'));
+      const state = Flip.getState(grid.querySelectorAll('.project-card, .project-card__cover'));
       cover.setAttribute('aria-expanded', String(expand));
       Flip.from(state, {
         duration: 0.5,
