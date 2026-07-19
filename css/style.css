@@ -344,6 +344,10 @@ a { text-decoration: none; color: inherit; }
   font-size: clamp(28px, 3vw, 40px);
   letter-spacing: var(--tracking-sans);
 }
+.about__hello .swash__letter {
+  font-size: 1.35em;
+  margin-right: 0.06em;
+}
 .about__name {
   font-family: var(--font-body);
   font-weight: 500;
