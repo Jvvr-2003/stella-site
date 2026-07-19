@@ -513,7 +513,6 @@ a { text-decoration: none; color: inherit; }
   border: 0;
   background: none;
   cursor: pointer;
-  transition: aspect-ratio 500ms var(--ease);
 }
 .project-card:has(.project-card__cover[aria-expanded="true"]) .project-card__cover {
   aspect-ratio: 16 / 9;
@@ -538,17 +537,25 @@ a { text-decoration: none; color: inherit; }
   font-size: 15px;
   line-height: 1;
   transition: transform 300ms var(--ease);
+  z-index: 1;
 }
 .project-card__cover[aria-expanded="true"] .project-card__hint-icon { transform: rotate(45deg); }
 
+.project-card__overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.38);
+}
 .project-card__name {
-  display: block;
-  margin-top: 10px;
+  color: var(--white);
   font-family: var(--font-body);
-  font-size: 12px;
   font-weight: 500;
+  font-size: 13px;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
 }
 
 /* Acordeão em CSS puro: a linha do grid vai de 0fr (compactado) pra 1fr
