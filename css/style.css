@@ -2,13 +2,8 @@
    Stella Medeiros — design tokens (guia de identidade)
    ============================================ */
 :root {
-  --cream: #F8F4EA;
-  --forest: #161A17;
-  --beige: #D9C8A2;
-  --gray: #BDBDB7;
-  --black: #0A0A0A;
+  --black: #000000;
   --white: #FFFFFF;
-  --border: #E4DFD2;
 
   /* Neue Haas Grotesk / Helvetica Neue e Bickham Script são pagas;
      Archivo e Pinyon Script são as equivalentes livres usadas aqui —
@@ -49,8 +44,8 @@
 html { scroll-behavior: smooth; }
 
 body {
-  background: var(--cream);
-  color: var(--forest);
+  background: var(--white);
+  color: var(--black);
   font-family: var(--font-body);
   overflow-x: hidden;
 }
@@ -59,14 +54,14 @@ a { text-decoration: none; color: inherit; }
 
 .placeholder-block {
   background: repeating-linear-gradient(
-    45deg, var(--gray) 0, var(--gray) 1px, transparent 1px, transparent 12px
+    45deg, rgba(0, 0, 0, 0.15) 0, rgba(0, 0, 0, 0.15) 1px, transparent 1px, transparent 12px
   ), var(--white);
-  border: 1px dashed var(--gray);
+  border: 1px dashed rgba(0, 0, 0, 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  color: var(--forest);
+  color: var(--black);
   font-size: 12px;
   font-family: var(--font-body);
   letter-spacing: 0.02em;
@@ -163,8 +158,8 @@ a { text-decoration: none; color: inherit; }
   flex-direction: column;
   justify-content: space-between;
   gap: 32px;
-  background: var(--forest);
-  color: var(--cream);
+  background: var(--black);
+  color: var(--white);
   padding: 28px 48px 40px;
   overflow: hidden;
 }
@@ -183,8 +178,8 @@ a { text-decoration: none; color: inherit; }
 .hero__menu {
   display: flex;
   gap: 8px;
-  background: rgba(248, 244, 234, 0.07);
-  border: 1px solid rgba(248, 244, 234, 0.12);
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 999px;
   padding: 6px;
 }
@@ -194,18 +189,19 @@ a { text-decoration: none; color: inherit; }
   font-family: var(--font-body);
   font-size: var(--size-menu);
   font-weight: 500;
-  color: var(--cream);
+  color: var(--white);
   opacity: 0.75;
   transition: background 300ms var(--ease), opacity 300ms var(--ease);
 }
-.hero__menu a:hover { opacity: 1; background: rgba(248, 244, 234, 0.1); }
+.hero__menu a:hover { opacity: 1; background: rgba(255, 255, 255, 0.1); }
 
 .hero__cta {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  background: var(--cream);
-  color: var(--forest);
+  background: var(--white);
+  color: var(--black);
+  border: 1px solid var(--white);
   font-family: var(--font-body);
   font-weight: 500;
   font-size: var(--size-menu);
@@ -215,7 +211,7 @@ a { text-decoration: none; color: inherit; }
   transition: background 300ms var(--ease), color 300ms var(--ease);
 }
 .hero__cta .arrow { transition: transform 300ms var(--ease); }
-.hero__cta:hover { background: var(--beige); }
+.hero__cta:hover { background: var(--black); color: var(--white); }
 .hero__cta:hover .arrow { transform: translateX(4px); }
 
 .hero__body {
@@ -236,10 +232,10 @@ a { text-decoration: none; color: inherit; }
   align-items: center;
 }
 
-.hero__title.swash { color: var(--cream); justify-content: center; }
+.hero__title.swash { color: var(--white); justify-content: center; }
 .hero__title .swash__letter {
   font-size: clamp(90px, 15vw, 220px);
-  color: var(--beige);
+  color: var(--white);
 }
 .hero__title .swash__rest {
   font-size: clamp(48px, 8vw, 120px);
@@ -251,7 +247,8 @@ a { text-decoration: none; color: inherit; }
   font-weight: 300;
   letter-spacing: 0.04em;
   font-size: clamp(14px, 1.4vw, 17px);
-  color: var(--beige);
+  color: var(--white);
+  opacity: 0.7;
   margin-top: 12px;
 }
 
@@ -280,7 +277,7 @@ a { text-decoration: none; color: inherit; }
   font-family: var(--font-body);
   font-size: var(--size-caption);
   letter-spacing: 0.06em;
-  color: var(--cream);
+  color: var(--white);
   opacity: 0.55;
 }
 
@@ -292,10 +289,10 @@ a { text-decoration: none; color: inherit; }
 }
 .placeholder-block--dark {
   background: repeating-linear-gradient(
-    45deg, rgba(248, 244, 234, 0.15) 0, rgba(248, 244, 234, 0.15) 1px, transparent 1px, transparent 12px
-  ), rgba(248, 244, 234, 0.04);
-  border: 1px dashed rgba(248, 244, 234, 0.3);
-  color: var(--cream);
+    45deg, rgba(255, 255, 255, 0.15) 0, rgba(255, 255, 255, 0.15) 1px, transparent 1px, transparent 12px
+  ), rgba(255, 255, 255, 0.04);
+  border: 1px dashed rgba(255, 255, 255, 0.3);
+  color: var(--white);
 }
 
 .hero__scroll {
@@ -307,9 +304,9 @@ a { text-decoration: none; color: inherit; }
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  border: 1px solid rgba(248, 244, 234, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   background: transparent;
-  color: var(--cream);
+  color: var(--white);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -326,14 +323,14 @@ a { text-decoration: none; color: inherit; }
   min-height: 640px;
 }
 .split__left {
-  background: var(--cream);
+  background: var(--white);
   padding: 80px 64px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: var(--gap-title);
 }
-.split__title { color: var(--forest); }
+.split__title { color: var(--black); }
 .split__title .swash__letter { font-size: clamp(48px, 5.5vw, 76px); }
 .split__title .swash__rest,
 .split__title-rest {
@@ -368,8 +365,8 @@ a { text-decoration: none; color: inherit; }
 }
 
 .split__right {
-  background: var(--forest);
-  color: var(--cream);
+  background: var(--black);
+  color: var(--white);
   padding: 64px;
   display: flex;
   align-items: flex-end;
@@ -398,7 +395,7 @@ a { text-decoration: none; color: inherit; }
   font-family: var(--font-display);
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: var(--cream);
+  color: var(--white);
 }
 
 /* ============================================
@@ -448,8 +445,8 @@ a { text-decoration: none; color: inherit; }
    FOOTER
    ============================================ */
 .footer {
-  background: var(--forest);
-  color: var(--cream);
+  background: var(--black);
+  color: var(--white);
   padding: 48px;
   text-align: center;
   font-size: 12px;
