@@ -1,5 +1,5 @@
 /* ============================================
-   incrível. — design tokens (guia de identidade)
+   Stella Medeiros — design tokens (guia de identidade)
    ============================================ */
 :root {
   --cream: #F8F4EA;
@@ -10,8 +10,10 @@
   --white: #FFFFFF;
   --border: #E4DFD2;
 
-  --font-display: 'Montserrat', sans-serif;
-  --font-script: 'Playfair Display', serif;
+  /* Neue Haas Grotesk / Helvetica Neue e Bickham Script são pagas;
+     Archivo e Cormorant Garamond são as equivalentes livres usadas aqui. */
+  --font-display: 'Archivo', sans-serif;
+  --font-script: 'Cormorant Garamond', serif;
   --font-body: 'Inter', sans-serif;
 
   --container: 1440px;
@@ -20,6 +22,22 @@
   --gap-card: 32px;
 
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* ---- Sistema tipográfico ----
+     Nível 1 (sans, black/bold, uppercase, tracking -2%~0%, line-height 90~100%)
+     Nível 2 (script, fina, title case, sobreposta)
+     Nível 3/4 (Inter, regular/medium) */
+  --size-hero: clamp(56px, 9vw, 96px);
+  --size-title: clamp(36px, 4.5vw, 64px);
+  --size-accent: clamp(32px, 5.5vw, 64px);
+  --size-subtitle: 20px;
+  --size-body: 17px;
+  --size-caption: 13px;
+  --size-menu: 14px;
+
+  --tracking-sans: -0.02em;
+  --lh-sans-title: 0.95;
+  --lh-body: 1.4;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -52,6 +70,60 @@ a { text-decoration: none; color: inherit; }
 .placeholder-label { opacity: 0.6; padding: 8px; }
 
 /* ============================================
+   TIPOGRAFIA — classes reutilizáveis no resto do site
+   ============================================ */
+.type-hero {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: var(--size-hero);
+  line-height: var(--lh-sans-title);
+  letter-spacing: var(--tracking-sans);
+  text-transform: uppercase;
+}
+.type-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--size-title);
+  line-height: var(--lh-sans-title);
+  letter-spacing: var(--tracking-sans);
+  text-transform: uppercase;
+}
+.type-accent {
+  font-family: var(--font-script);
+  font-style: italic;
+  font-weight: 500;
+  font-size: var(--size-accent);
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+}
+.type-subtitle {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: var(--size-subtitle);
+  line-height: var(--lh-body);
+}
+.type-body {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: var(--size-body);
+  line-height: var(--lh-body);
+}
+.type-caption {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: var(--size-caption);
+  line-height: var(--lh-body);
+}
+.type-menu {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: var(--size-menu);
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+}
+
+/* ============================================
    NAV
    ============================================ */
 .nav {
@@ -72,11 +144,11 @@ a { text-decoration: none; color: inherit; }
 .nav__links {
   display: flex;
   gap: 32px;
-  font-family: var(--font-display);
-  font-size: 12px;
-  font-weight: 700;
+  font-family: var(--font-body);
+  font-size: var(--size-menu);
+  font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.01em;
 }
 .nav__links--right { justify-self: end; }
 .nav__links a { position: relative; }
@@ -94,7 +166,8 @@ a { text-decoration: none; color: inherit; }
   justify-self: center;
   font-family: var(--font-script);
   font-style: italic;
-  font-size: 20px;
+  font-weight: 500;
+  font-size: 26px;
 }
 
 /* ============================================
@@ -103,69 +176,81 @@ a { text-decoration: none; color: inherit; }
 .hero {
   max-width: var(--container);
   margin: 0 auto;
-  padding: 64px 48px 120px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
+  padding: 56px 48px 96px;
 }
 
-.hero__mockup { margin-bottom: 8px; }
-.hero__mockup-frame {
-  width: 140px;
-  height: 220px;
-  border-radius: 4px;
+.hero__meta {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-body);
+  font-size: var(--size-caption);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  opacity: 0.6;
+  margin-bottom: 32px;
 }
 
 .hero__title {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: -12px;
+  margin-top: 64px;
 }
-.hero__script {
+.hero__word {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: var(--size-hero);
+  line-height: var(--lh-sans-title);
+  letter-spacing: var(--tracking-sans);
+  text-transform: uppercase;
+  color: var(--forest);
+}
+.hero__signature {
+  position: absolute;
+  bottom: 100%;
+  left: 1%;
+  margin-bottom: -0.12em;
   font-family: var(--font-script);
   font-style: italic;
-  font-weight: 400;
-  font-size: clamp(40px, 6vw, 72px);
+  font-weight: 500;
+  font-size: clamp(26px, 4.2vw, 52px);
   color: var(--forest);
-  line-height: 1;
-  margin-bottom: -0.15em;
-}
-.hero__bold {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(36px, 6vw, 64px);
-  line-height: 1.05;
-  letter-spacing: -0.01em;
+  transform: rotate(-4deg);
+  z-index: 1;
+  white-space: nowrap;
 }
 
-.hero__sub {
-  max-width: 480px;
-  margin-top: var(--gap-title);
-  font-size: 13px;
+.hero__foot {
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+}
+.hero__role {
+  font-family: var(--font-body);
+  font-size: var(--size-caption);
   line-height: 1.6;
   letter-spacing: 0.02em;
   text-transform: uppercase;
   color: var(--forest);
   opacity: 0.75;
 }
+.hero__role em { font-style: normal; opacity: 0.6; }
 
 .hero__cta {
-  margin-top: 40px;
   display: inline-flex;
   align-items: center;
   gap: 10px;
   background: var(--forest);
   color: var(--cream);
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 12px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: var(--size-menu);
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.01em;
   padding: 18px 32px;
   border-radius: 0;
+  white-space: nowrap;
   transition: background 300ms var(--ease), color 300ms var(--ease);
 }
 .hero__cta .arrow { transition: transform 300ms var(--ease); }
@@ -193,16 +278,17 @@ a { text-decoration: none; color: inherit; }
 }
 .split__title {
   font-family: var(--font-display);
-  font-weight: 800;
+  font-weight: 700;
   font-size: clamp(28px, 3.2vw, 44px);
-  line-height: 1.15;
+  line-height: var(--lh-sans-title);
+  letter-spacing: var(--tracking-sans);
   text-transform: uppercase;
 }
 .split__title-plain { font-weight: 500; }
 .split__script {
   font-family: var(--font-script);
   font-style: italic;
-  font-weight: 400;
+  font-weight: 500;
   text-transform: none;
 }
 .split__copy {
@@ -262,8 +348,10 @@ a { text-decoration: none; color: inherit; }
 }
 .portfolio__title {
   font-family: var(--font-display);
-  font-weight: 800;
+  font-weight: 700;
   font-size: clamp(32px, 4vw, 48px);
+  line-height: var(--lh-sans-title);
+  letter-spacing: var(--tracking-sans);
   text-transform: uppercase;
   margin-bottom: var(--gap-section);
 }
@@ -326,6 +414,12 @@ a { text-decoration: none; color: inherit; }
   .nav__links--left { display: none; }
   .nav__links--right { gap: 20px; }
   .nav__logo { justify-self: start; }
+
+  .hero { padding: 40px 24px 64px; }
+  .hero__meta { flex-direction: column; gap: 4px; margin-bottom: 24px; }
+  .hero__title { margin-top: 40px; }
+  .hero__signature { margin-bottom: 0.05em; }
+  .hero__foot { flex-direction: column; align-items: flex-start; gap: 24px; }
 
   .split { grid-template-columns: 1fr; }
   .split__left, .split__right { padding: 48px 24px; }
