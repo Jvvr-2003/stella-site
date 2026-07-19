@@ -549,6 +549,9 @@ a { text-decoration: none; color: inherit; }
   justify-content: center;
   background: rgba(0, 0, 0, 0.38);
 }
+.project-card__cover[aria-expanded="true"] .project-card__overlay {
+  display: none;
+}
 .project-card__name {
   color: var(--white);
   font-family: var(--font-body);
@@ -558,23 +561,18 @@ a { text-decoration: none; color: inherit; }
   letter-spacing: 0.06em;
 }
 
-/* Acordeão em CSS puro: a linha do grid vai de 0fr (compactado) pra 1fr
-   (aberto) quando o botão da capa está com aria-expanded="true". */
+/* Altura controlada via JS (js/main.js) numa sequência: a capa termina
+   de crescer (Flip) pra só então a galeria abrir, e vice-versa ao
+   fechar — evita as duas animações competindo/sobrepondo. */
 .project-card__gallery-wrap {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 500ms var(--ease);
-}
-.project-card__cover[aria-expanded="true"] ~ .project-card__gallery-wrap {
-  grid-template-rows: 1fr;
+  height: 0;
+  overflow: hidden;
 }
 .project-card__gallery {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: var(--gap-card);
   padding-top: var(--gap-card);
-  overflow: hidden;
-  min-height: 0;
 }
 .project-card__gallery-item {
   width: 100%;
