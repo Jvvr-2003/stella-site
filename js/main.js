@@ -23,6 +23,7 @@ document.querySelectorAll('[data-reveal]').forEach((el, i) => {
 document.querySelectorAll('.project-category__grid').forEach((grid) => {
   grid.querySelectorAll('.project-card__cover').forEach((cover) => {
     const card = cover.closest('.project-card');
+    const category = cover.closest('.project-category');
     const wrap = card.querySelector('.project-card__gallery-wrap');
     const items = card.querySelectorAll('.project-card__gallery-item');
 
@@ -34,12 +35,13 @@ document.querySelectorAll('.project-category__grid').forEach((grid) => {
       //
       // Ao encolher, o layout já fica pequeno instantaneamente (o que
       // empurra "Email Marketing" etc. pra posição final na hora), mas
-      // a capa ainda pinta grande enquanto anima de volta — como ela
-      // vem antes no HTML, esse conteúdo ficaria por cima dela. Sobe o
-      // z-index só durante essa fase pra cobrir o que já reposicionou.
+      // a capa ainda pinta grande enquanto anima de volta. z-index no
+      // card sozinho não resolve — "Email Marketing" é uma categoria
+      // irmã de "Books Imobiliários", não do card, então o empilhamento
+      // é disputado nesse nível. Sobe o z-index da categoria inteira.
       if (!expand) {
-        card.style.position = 'relative';
-        card.style.zIndex = '5';
+        category.style.position = 'relative';
+        category.style.zIndex = '5';
       }
       const state = Flip.getState(grid.querySelectorAll('.project-card'));
       cover.setAttribute('aria-expanded', String(expand));
@@ -48,8 +50,8 @@ document.querySelectorAll('.project-category__grid').forEach((grid) => {
         ease: 'power2.inOut',
         onComplete: () => {
           if (!expand) {
-            card.style.position = '';
-            card.style.zIndex = '';
+            category.style.position = '';
+            category.style.zIndex = '';
           }
           if (onDone) onDone();
         },
