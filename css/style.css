@@ -478,13 +478,43 @@ a { text-decoration: none; color: inherit; }
 
 .project { margin-bottom: var(--gap-section); }
 .project__cover {
+  position: relative;
+  display: block;
   width: 100%;
   aspect-ratio: 16 / 9;
   overflow: hidden;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
 }
 .project__cover img {
   width: 100%; height: 100%; object-fit: cover;
+  transition: transform 400ms var(--ease);
 }
+.project__cover:hover img { transform: scale(1.02); }
+.project__cover-hint {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--white);
+  color: var(--black);
+  padding: 12px 20px;
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.project__cover-hint-icon {
+  display: inline-block;
+  transition: transform 300ms var(--ease);
+}
+.project__cover[aria-expanded="true"] .project__cover-hint-icon { transform: rotate(45deg); }
 .project__meta {
   display: flex;
   justify-content: space-between;
@@ -504,11 +534,23 @@ a { text-decoration: none; color: inherit; }
   opacity: 0.6;
 }
 
+/* Acordeão em CSS puro: a linha do grid vai de 0fr (compactado) pra 1fr
+   (aberto) quando o botão da capa está com aria-expanded="true". */
+.project__gallery-wrap {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 500ms var(--ease);
+}
+.project__cover[aria-expanded="true"] ~ .project__gallery-wrap {
+  grid-template-rows: 1fr;
+}
 .project__gallery {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: var(--gap-card);
-  margin-top: var(--gap-card);
+  padding-top: var(--gap-card);
+  overflow: hidden;
+  min-height: 0;
 }
 .project__gallery-item {
   width: 100%;
