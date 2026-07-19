@@ -136,10 +136,6 @@ a { text-decoration: none; color: inherit; }
   align-items: baseline;
   flex-wrap: wrap;
 }
-.swash-pair {
-  display: inline-flex;
-  align-items: baseline;
-}
 .swash__letter {
   font-family: var(--font-swash);
   font-style: normal;
