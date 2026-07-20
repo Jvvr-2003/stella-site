@@ -25,6 +25,9 @@ document.querySelectorAll('.project-category__grid').forEach((grid) => {
     const card = cover.closest('.project-card');
     const category = cover.closest('.project-category');
     const wrap = card.querySelector('.project-card__gallery-wrap');
+    // Cards estáticos (ex.: Estáticos em Social Media) são só uma
+    // imagem, sem <button> nem galeria pra abrir — nada a wirear.
+    if (!wrap) return;
     const items = card.querySelectorAll('.project-card__gallery-item');
     let isAnimating = false;
 
