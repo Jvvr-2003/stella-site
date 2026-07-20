@@ -20,15 +20,23 @@ document.querySelectorAll('[data-reveal]').forEach((el, i) => {
 // SEQUÊNCIA (nunca as duas coisas ao mesmo tempo, pra não sobrepor):
 //   abrir  → Flip cresce a capa até o fim, só então a galeria abre
 //   fechar → a galeria recolhe até o fim, só então a capa encolhe (Flip)
+//
+// Exceção: cards ".project-card--gallery-toggle" (Carrossel/Stories em
+// Social Media) não têm capa separada do conteúdo — ao abrir, a capa
+// só some (CSS) em vez de crescer, e quem fecha de volta é a primeira
+// imagem da própria galeria, não a capa (que já não é clicável).
 document.querySelectorAll('.project-category__grid').forEach((grid) => {
-  grid.querySelectorAll('.project-card__cover').forEach((cover) => {
-    const card = cover.closest('.project-card');
-    const category = cover.closest('.project-category');
+  grid.querySelectorAll('.project-card').forEach((card) => {
+    const cover = card.querySelector('.project-card__cover');
+    if (!cover) return;
+    const category = card.closest('.project-category');
     const wrap = card.querySelector('.project-card__gallery-wrap');
     // Cards estáticos (ex.: Estáticos em Social Media) são só uma
     // imagem, sem galeria pra abrir — a capa ainda cresce ao clicar,
     // só que sem a etapa de abrir/fechar galeria em seguida.
     const items = wrap ? card.querySelectorAll('.project-card__gallery-item') : null;
+    const isGalleryToggle = card.classList.contains('project-card--gallery-toggle');
+    const closeTrigger = isGalleryToggle ? card.querySelector('.project-card__gallery-item--close') : cover;
     let isAnimating = false;
 
     const flipCover = (expand, onDone) => {
@@ -85,28 +93,48 @@ document.querySelectorAll('.project-category__grid').forEach((grid) => {
       });
     };
 
-    cover.addEventListener('click', () => {
-      // Ignora cliques repetidos enquanto a sequência de abrir/fechar
-      // ainda está rodando — clicar de novo no meio da transição podia
-      // sobrepor duas animações e dar a impressão de "crescer de novo".
+    const finish = () => {
+      isAnimating = false;
+      cover.classList.remove('is-animating');
+    };
+
+    const open = () => {
       if (isAnimating) return;
       isAnimating = true;
       cover.classList.add('is-animating');
-
-      const finish = () => {
-        isAnimating = false;
-        cover.classList.remove('is-animating');
-      };
-
-      const isOpen = cover.getAttribute('aria-expanded') === 'true';
       if (!wrap) {
-        // Sem galeria: só cresce/encolhe a capa.
-        flipCover(!isOpen, finish);
-      } else if (isOpen) {
-        closeGallery(() => flipCover(false, finish));
+        // Sem galeria: só cresce a capa.
+        flipCover(true, finish);
       } else {
         flipCover(true, () => { openGallery(); finish(); });
       }
+    };
+
+    const close = () => {
+      if (isAnimating) return;
+      isAnimating = true;
+      cover.classList.add('is-animating');
+      if (!wrap) {
+        flipCover(false, finish);
+      } else {
+        closeGallery(() => flipCover(false, finish));
+      }
+    };
+
+    cover.addEventListener('click', () => {
+      const isOpen = cover.getAttribute('aria-expanded') === 'true';
+      if (isOpen) {
+        // Em cards gallery-toggle a capa some ao abrir (display:none),
+        // então esse clique nunca chega a acontecer nesse estado — mas
+        // mantém a guarda por segurança/consistência.
+        if (!isGalleryToggle) close();
+      } else {
+        open();
+      }
     });
+
+    if (closeTrigger && closeTrigger !== cover) {
+      closeTrigger.addEventListener('click', close);
+    }
   });
 });
