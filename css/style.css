@@ -587,6 +587,11 @@ a { text-decoration: none; color: inherit; }
   aspect-ratio: 1190 / 842;
   overflow: hidden;
 }
+/* Cada projeto tem suas próprias fotos, nem sempre na mesma proporção
+   — GS STAY é 16:9 (1920x1080), diferente do 1190:842 do VIVACE. */
+.project-card__gallery-item--16-9 {
+  aspect-ratio: 16 / 9;
+}
 .project-card__gallery-item img {
   width: 100%; height: 100%; object-fit: cover;
   transition: transform 400ms var(--ease);
