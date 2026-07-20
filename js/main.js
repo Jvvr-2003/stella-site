@@ -26,9 +26,9 @@ document.querySelectorAll('.project-category__grid').forEach((grid) => {
     const category = cover.closest('.project-category');
     const wrap = card.querySelector('.project-card__gallery-wrap');
     // Cards estáticos (ex.: Estáticos em Social Media) são só uma
-    // imagem, sem <button> nem galeria pra abrir — nada a wirear.
-    if (!wrap) return;
-    const items = card.querySelectorAll('.project-card__gallery-item');
+    // imagem, sem galeria pra abrir — a capa ainda cresce ao clicar,
+    // só que sem a etapa de abrir/fechar galeria em seguida.
+    const items = wrap ? card.querySelectorAll('.project-card__gallery-item') : null;
     let isAnimating = false;
 
     const flipCover = (expand, onDone) => {
@@ -99,7 +99,10 @@ document.querySelectorAll('.project-category__grid').forEach((grid) => {
       };
 
       const isOpen = cover.getAttribute('aria-expanded') === 'true';
-      if (isOpen) {
+      if (!wrap) {
+        // Sem galeria: só cresce/encolhe a capa.
+        flipCover(!isOpen, finish);
+      } else if (isOpen) {
         closeGallery(() => flipCover(false, finish));
       } else {
         flipCover(true, () => { openGallery(); finish(); });
