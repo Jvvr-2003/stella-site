@@ -29,7 +29,12 @@ document.querySelectorAll('.project-category__grid').forEach((grid) => {
   grid.querySelectorAll('.project-card').forEach((card) => {
     const cover = card.querySelector('.project-card__cover');
     if (!cover) return;
-    const category = card.closest('.project-category');
+    // Sobe o z-index do nível de empilhamento mais próximo do card —
+    // uma .project-subsection (Carrossel/Estáticos/Stories) se houver,
+    // senão a .project-category inteira. Precisa ser o nível certo:
+    // z-index dentro de um card não "vence" a disputa contra outra
+    // subseção/categoria irmã, só contra elementos dentro dela mesma.
+    const stackingParent = card.closest('.project-subsection') || card.closest('.project-category');
     const wrap = card.querySelector('.project-card__gallery-wrap');
     // Cards estáticos (ex.: Estáticos em Social Media) são só uma
     // imagem, sem galeria pra abrir — a capa ainda cresce ao clicar,
@@ -48,20 +53,22 @@ document.querySelectorAll('.project-category__grid').forEach((grid) => {
       // uma vez só, e por um instante ela passa por um tamanho errado
       // (larga como antes, mas quadrada) antes de encolher de verdade.
       // Cada elemento precisa da sua própria medição antes/depois.
-      if (!expand) {
-        category.style.position = 'relative';
-        category.style.zIndex = '5';
-      }
+      //
+      // O reforço de z-index vale tanto pra abrir quanto pra fechar: em
+      // qualquer uma das duas direções, o card fica com um tamanho
+      // "errado" (grande) enquanto o layout ao redor já reflow no
+      // tamanho final, e sem isso o conteúdo seguinte (ex.: próxima
+      // subseção) pinta por cima do card ainda grande em vez de atrás.
+      stackingParent.style.position = 'relative';
+      stackingParent.style.zIndex = '5';
       const state = Flip.getState(grid.querySelectorAll('.project-card, .project-card__cover'));
       cover.setAttribute('aria-expanded', String(expand));
       Flip.from(state, {
         duration: 0.5,
         ease: 'power2.inOut',
         onComplete: () => {
-          if (!expand) {
-            category.style.position = '';
-            category.style.zIndex = '';
-          }
+          stackingParent.style.position = '';
+          stackingParent.style.zIndex = '';
           if (onDone) onDone();
         },
       });
